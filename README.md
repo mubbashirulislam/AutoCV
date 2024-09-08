@@ -1,6 +1,3 @@
-Here's a professional README file for your CV automation tool project:
-
----
 
 # 📧 CV Automation Tool
 
