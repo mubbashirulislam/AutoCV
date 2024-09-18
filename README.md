@@ -1,94 +1,32 @@
+# CV Automation Tool
 
-# 📧 CV Automation Tool
+A Flask-based web application designed to automate the process of sending CVs (Curriculum Vitae) via email. This project simplifies the job application process by allowing users to send their CVs to multiple recipients effortlessly.
 
-This Python script simplifies the process of sending your CV to multiple email addresses. Designed specifically for job seekers, it automates the task of sending customized emails with attachments, allowing users to efficiently apply to various job positions without the repetitive hassle of manual email composition. Just configure your details once, and the tool takes care of the rest.
+## Table of Contents
 
-## 🚀 Features
+- [Project Description](#project-description)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Running the Application Locally](#running-the-application-locally)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-- **Automated Email Sending**: Send your CV to multiple recipients in one go.
-- **Customizable Email Body & Subject**: Easily modify the email content for each application.
-- **Attachment Handling**: Automatically attach your CV or any file of your choice.
-- **Configurable SMTP Settings**: Works with any email service that supports SMTP, including Gmail, Outlook, Yahoo, and more.
-- **Error Handling**: Handles SMTP connection issues and provides detailed error messages for easier troubleshooting.
+## Project Description
 
-## 🛠️ Requirements
+The CV Automation Tool is built using Flask and aims to streamline the job application process for users by enabling them to send their CVs directly from a web interface. It utilizes a Python email module to handle email sending functionalities, allowing for easy management of multiple recipients.
 
-- Python 3.x
-- Required libraries: 
-  - `smtplib`
-  - `email.mime`
-  - `configparser`
+## Technologies Used
 
-Install the dependencies using the following command:
+- **Python**: The programming language used to develop the application.
+- **Flask**: A lightweight WSGI web application framework for Python.
+- **SMTPLib**: A built-in Python module for sending emails.
 
-```bash
-pip install -r requirements.txt
-```
+## Installation
 
-## ⚙️ Configuration
+To get started with this project, ensure that you have Python and pip installed on your machine. Follow these steps to set up the project:
 
-Before using the tool, you need to configure your email settings.
-
-1. Create a `config.ini` file in the same directory as the script with the following structure:
-
-   ```ini
-   [EmailConfiguration]
-   sender_email = your-email@example.com
-   sender_password = your-email-password
-   smtp_server = smtp.example.com
-   smtp_port = 465
-   ```
-
-2. Replace `your-email@example.com` with your email address.
-3. Replace `your-email-password` with your email password or app-specific password.
-4. Set the correct `smtp_server` and `smtp_port` based on your email provider (Gmail, Outlook, etc.).
-
-## 💻 Usage
-
-1. **Edit the Script**: Open the script and customize the `subject` and `body` for the email. For example:
-
-   ```python
-   subject = "Application for [Job Title]"
-   body = "Dear Hiring Manager,\n\nI am excited to apply for the [Job Title] position at [Company Name]..."
-   ```
-
-2. **CV Attachment**: Place your CV in the specified location, and make sure to update the `cv_path` in the script:
-
-   ```python
-   cv_path = "path/to/your/CV.pdf"
-   ```
-
-3. **Send Emails**: Add the list of recipient email addresses to the `recipient_emails` list in the script. You can include multiple addresses for bulk applications:
-
-   ```python
-   recipient_emails = ["hr@company1.com", "recruiter@company2.com"]
-   ```
-
-4. **Run the Script**: 
-
-   Simply run the script using Python:
-
+1. **Clone the repository:**
    ```bash
-   python cv_automation.py
-   ```
-
-   The script will automatically send your CV to each email address in the list.
-
-## ⚠️ Important Notes
-
-- **Email Provider Limitations**: Some email providers (like Gmail) may have restrictions on how many emails you can send at once. Be aware of your provider's email sending limits to avoid being flagged as spam.
-- **Password Security**: If you're using Gmail, you may need to create an App Password or enable "Less Secure Apps" to allow the script to work.
-
-## 📝 Example
-
-An example run of the script looks like this:
-
-```bash
-Email sent successfully to hr@company1.com
-Email sent successfully to recruiter@company2.com
-Emails sent successfully.
-```
-
----
-
-By using this tool, job seekers can save time and effort, focusing on what matters most—landing the next opportunity!
+   git clone https://github.com/yourusername/cv-automation-tool.git
+   cd cv-automation-tool
