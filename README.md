@@ -2,7 +2,7 @@
 
 A Flask-based web application designed to automate the process of sending CVs (Curriculum Vitae) via email. This project simplifies the job application process by allowing users to send their CVs to multiple recipients effortlessly.
 
-![video](Screenshot.gif)
+![video](screenshot.gif)
 
 ## Table of Contents
 
