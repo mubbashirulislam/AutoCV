@@ -1,6 +1,3 @@
-Here's the complete and active README file for your AutoCV project, ready for you to copy and paste directly into your GitHub repository:
-
-```markdown
 # AutoCV
 
 A Flask-based web application designed to automate the process of sending CVs (Curriculum Vitae) via email. This project simplifies the job application process by allowing users to send their CVs to multiple recipients effortlessly.
