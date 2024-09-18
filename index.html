@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Sender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AutoCV</h1>
+            <p>Automate your job applications by sending your CV to multiple recipients effortlessly.</p>
+        </header>
+
+        <div class="form-section">
+            <form id="cv-sender-form">
+                <div class="input-group">
+                    <label for="subject">Email Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="Enter your email subject" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="body">Email Body</label>
+                    <textarea id="body" name="body" rows="5" placeholder="Write your email body here..." required></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="cv-file">Attach Your CV (PDF only)</label>
+                    <input type="file" id="cv-file" name="cv-file" accept=".pdf" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="recipient-emails">Recipient Emails (one per line)</label>
+                    <textarea id="recipient-emails" name="recipient-emails" rows="5" placeholder="Enter recipient emails, one per line" required></textarea>
+                </div>
+
+                <button type="submit" class="btn" id="send-btn">Send CV</button>
+                <button type="button" class="btn reset-btn" id="reset-btn">Reset Form</button> <!-- Reset button -->
+            </form>
+
+            <div id="status-message" class="fade-in"></div>
+            <button id="dismiss-btn" class="btn dismiss-btn" style="display: none;">Dismiss</button> <!-- Dismiss button -->
+            <div id="loading-spinner" class="spinner" style="display: none;"></div> <!-- Loading spinner -->
+        </div>
+    </div>
+
+    <audio id="notification-sound" src="notification.mp3"></audio> <!-- Add a notification sound file -->
+    
+    <script src="script.js"></script>
+</body>
+</html>

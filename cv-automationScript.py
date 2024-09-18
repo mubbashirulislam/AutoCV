@@ -1,57 +1,45 @@
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
-import configparser
+import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
+from your_email_module import send_email, read_config  # Import your email functions
 
-def read_config(file_path='config.ini'):
-    config = configparser.ConfigParser()
-    config.read(file_path)
-    return config['EmailConfiguration']
+app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
-def send_email(subject, body, to_email, attachment_path, sender_email, sender_password, smtp_server, smtp_port):
-    # Create the email message
-    message = MIMEMultipart()
-    message['From'] = sender_email
-    message['To'] = to_email
-    message['Subject'] = subject
+# Ensure the uploads directory exists
+if not os.path.exists('uploads'):
+    os.makedirs('uploads')
 
-    # Attach the CV as an attachment
-    with open(attachment_path, 'rb') as f:
-        attachment = MIMEApplication(f.read())
-        attachment.add_header('Content-Disposition', 'attachment', filename='Your_CV.pdf')
-        message.attach(attachment)
-
-    # Attach the body of the email
-    message.attach(MIMEText(body, 'plain'))
-
+@app.route('/send-cv', methods=['POST'])
+def send_cv():
     try:
-        # Connect to the SMTP server and send the email
-        with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
-            server.login(sender_email, sender_password)
-            server.sendmail(sender_email, to_email, message.as_string())
-        print(f"Email sent successfully to {to_email}")
+        subject = request.form['subject']
+        body = request.form['body']
+        recipient_emails = request.form['recipient-emails'].splitlines()
+        cv_file = request.files['cv-file']
+
+        # Save the file temporarily
+        cv_path = os.path.join('uploads', cv_file.filename)
+        cv_file.save(cv_path)
+
+        # Read email configuration
+        email_config = read_config()
+
+        # Send the email
+        for recipient in recipient_emails:
+            send_email(subject, body, recipient, cv_path, 
+                       email_config['sender_email'], 
+                       email_config['sender_password'], 
+                       email_config['smtp_server'], 
+                       int(email_config['smtp_port']))
+        
+        # Remove the temporary file
+        os.remove(cv_path)
+        
+        return jsonify({'status': 'success', 'message': 'Emails sent successfully'})
+    
     except Exception as e:
-        print(f"Error sending email to {to_email}: {e}")
+        return jsonify({'status': 'error', 'message': str(e)})
 
 if __name__ == "__main__":
-    # Read email configuration from the config file
-    email_config = read_config()
-
-    # Leave subject and body empty for customization
-    subject = ""
-    body = ""
-
-    # Specify the path to your CV
-    cv_path = "path/to/your/CV.pdf"
-
-    # Specify the list of recipient email addresses
-    recipient_emails = ["recipient@example.com"]
-
-    # Loop through the list of recipients and send the email
-    for recipient_email in recipient_emails:
-        send_email(subject, body, recipient_email, cv_path,
-                   email_config['sender_email'], email_config['sender_password'],
-                   email_config['smtp_server'], int(email_config['smtp_port']))
-
-    print("Emails sent successfully.")
+    app.run(debug=True)
