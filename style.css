@@ -1,5 +1,14 @@
-/* Importing the Poppins font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+    --background-color: #121212;
+    --secondary-bg-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --highlight-color: #0ef;
+    --highlight-hover: #0bc;
+    --error-color: #d9534f;
+    --error-hover: #c9302c;
+}
 
 * {
     margin: 0;
@@ -8,23 +17,24 @@
 }
 
 body {
-    background-color: #121212; /* Background from my palette */
-    color: #e0e0e0;            /* Text color from my palette */
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 1rem;
 }
 
 .container {
     width: 100%;
     max-width: 600px;
     padding: 2rem;
-    background-color: #1e1e1e; /* Secondary background color */
+    background-color: var(--secondary-bg-color);
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.5s ease-in-out; /* Fade-in animation */
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 header {
@@ -33,13 +43,14 @@ header {
 }
 
 h1 {
-    color: #0ef; /* Highlight color */
+    color: var(--highlight-color);
     font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 p {
-    margin-top: 1rem;
     font-size: 1.2rem;
+    line-height: 1.5;
 }
 
 .form-section {
@@ -56,87 +67,126 @@ label {
     font-weight: 600;
 }
 
-input[type="text"], textarea, input[type="file"] {
+input[type="text"],
+textarea,
+input[type="file"] {
     width: 100%;
     padding: 0.8rem;
     border: 1px solid #444;
     border-radius: 5px;
-    background-color: #121212;
-    color: #e0e0e0;
-    transition: border-color 0.3s ease; /* Border color transition */
-    font-family: 'Poppins', sans-serif; /* Changed font */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 input[type="text"]:focus,
-textarea:focus {
-    border-color: #0ef; /* Change border color on focus */
-    outline: none; /* Remove default outline */
+textarea:focus,
+input[type="file"]:focus {
+    border-color: var(--highlight-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(14, 255, 255, 0.2);
 }
 
 input[type="file"] {
     padding: 0.5rem;
+    cursor: pointer;
 }
 
 textarea {
-    resize: none;
+    resize: vertical;
+    min-height: 100px;
 }
 
-/* Centering and reducing button width */
-button.btn {
-    width: 80%; /* Reduced width for buttons */
-    max-width: 200px; /* Maximum width to ensure compactness */
+.btn {
+    width: 80%;
+    max-width: 200px;
     padding: 0.8rem;
-    margin: 0.8rem auto; /* Centering buttons */
-    display: block; /* Ensuring buttons are block-level for centering */
-    background-color: #0ef;
-    color: #1f242d;
+    margin: 0.8rem auto;
+    display: block;
+    background-color: var(--highlight-color);
+    color: var(--background-color);
     border: none;
     border-radius: 5px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s; /* Added transform transition */
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-button.btn:hover {
-    background-color: #0bc;
-    transform: scale(1.05); /* Slightly scale button on hover */
+.btn:hover,
+.btn:focus {
+    background-color: var(--highlight-hover);
+    transform: scale(1.05);
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(14, 255, 255, 0.4);
+}
+
+.btn-secondary {
+    background-color: #444;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #555;
 }
 
 #status-message {
     margin-top: 1rem;
     font-size: 1.2rem;
     text-align: center;
+    padding: 0.5rem;
+    border-radius: 5px;
 }
 
-/* Dismiss button style */
 .dismiss-btn {
-    margin-top: 1rem;
-    background-color: #d9534f; /* Red color for the dismiss button */
+    background-color: var(--error-color);
 }
 
-.dismiss-btn:hover {
-    background-color: #c9302c; /* Darker red on hover */
+.dismiss-btn:hover,
+.dismiss-btn:focus {
+    background-color: var(--error-hover);
 }
 
-/* Loading spinner */
 .spinner {
     margin: 1rem auto;
     border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid #0ef; /* Spinner color */
+    border-top: 4px solid var(--highlight-color);
     border-radius: 50%;
     width: 30px;
     height: 30px;
     animation: spin 1s linear infinite;
 }
 
-/* Spinner animation */
+.hint-text {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 0.25rem;
+}
+
+.char-count {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: right;
+    margin-top: 0.25rem;
+}
+
+.invalid {
+    border-color: #d9534f;
+}
+
+.invalid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(217, 83, 79, 0.25);
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-/* Mobile responsiveness */
 @media (max-width: 600px) {
     .container {
         padding: 1rem;
@@ -145,13 +195,16 @@ button.btn:hover {
     h1 {
         font-size: 2rem;
     }
+
+    .btn {
+        width: 100%;
+    }
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px); /* Slight upward movement */
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
@@ -162,20 +215,26 @@ button.btn:hover {
 @keyframes fadeOut {
     from {
         opacity: 1;
-        transform: translateY(0); /* Original position */
+        transform: translateY(0);
     }
     to {
         opacity: 0;
-        transform: translateY(-10px); /* Slight upward movement */
+        transform: translateY(-10px);
     }
 }
 
 .fade-in {
-    opacity: 1;
-    transition: opacity 0.5s ease-in, transform 0.5s ease-in; /* Smoother fade-in */
+    animation: fadeIn 0.5s ease-in forwards;
 }
 
 .fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smoother fade-out */
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+.invalid {
+    border-color: var(--error-color);
+}
+
+.invalid:focus {
+    box-shadow: 0 0 0 2px rgba(217, 83, 79, 0.2);
 }

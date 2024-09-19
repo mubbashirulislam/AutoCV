@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoCV</title>
+    <title>AutoCV - Automate Your Job Applications</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,40 +13,54 @@
             <p>Automate your job applications by sending your CV to multiple recipients effortlessly.</p>
         </header>
 
-        <div class="form-section">
-            <form id="cv-sender-form">
+        <main>
+            <form id="cv-sender-form" class="form-section">
                 <div class="input-group">
-                    <label for="subject">Email Subject</label>
-                    <input type="text" id="subject" name="subject" placeholder="Enter your email subject" required>
+                    <label for="email-subject">Email Subject</label>
+                    <input type="text" id="email-subject" name="subject" required
+                           placeholder="e.g., Application for Software Developer Position"
+                           aria-describedby="subject-hint">
+                    <p id="subject-hint" class="hint-text">Enter a concise and professional subject line for your application email.</p>
                 </div>
 
                 <div class="input-group">
-                    <label for="body">Email Body</label>
-                    <textarea id="body" name="body" rows="5" placeholder="Write your email body here..." required></textarea>
+                    <label for="email-body">Email Body</label>
+                    <textarea id="email-body" name="body" rows="5" required
+                              placeholder="Dear Hiring Manager,
+
+I am writing to express my interest in the [Position] role at [Company]..."
+                              aria-describedby="body-hint"></textarea>
+                    <p id="body-hint" class="hint-text">Craft a compelling message. Include your key qualifications and why you're interested in the position.</p>
                 </div>
 
                 <div class="input-group">
-                    <label for="cv-file">Attach Your CV (PDF only)</label>
-                    <input type="file" id="cv-file" name="cv-file" accept=".pdf" required>
+                    <label for="cv-file">Attach Your CV (PDF, DOC, or DOCX)</label>
+                    <input type="file" id="cv-file" name="cv-file" accept=".pdf,.doc,.docx" required
+                           aria-describedby="file-hint">
+                    <p id="file-hint" class="hint-text">Upload your most recent CV in PDF, DOC, or DOCX format.</p>
                 </div>
 
                 <div class="input-group">
                     <label for="recipient-emails">Recipient Emails (one per line)</label>
-                    <textarea id="recipient-emails" name="recipient-emails" rows="5" placeholder="Enter recipient emails, one per line" required></textarea>
+                    <textarea id="recipient-emails" name="recipient-emails" rows="5" required
+                              placeholder="hiring@company1.com
+jobs@company2.com
+careers@company3.com"
+                              aria-describedby="emails-hint"></textarea>
+                    <p id="emails-hint" class="hint-text">Enter each recipient's email address on a new line. Double-check for accuracy.</p>
                 </div>
 
-                <button type="submit" class="btn" id="send-btn">Send CV</button>
-                <button type="button" class="btn reset-btn" id="reset-btn">Reset Form</button> <!-- Reset button -->
+                <button type="submit" id="send-btn" class="btn">Send CV</button>
+                <button type="button" id="reset-btn" class="btn btn-secondary">Reset Form</button>
             </form>
 
-            <div id="status-message" class="fade-in"></div>
-            <button id="dismiss-btn" class="btn dismiss-btn" style="display: none;">Dismiss</button> <!-- Dismiss button -->
-            <div id="loading-spinner" class="spinner" style="display: none;"></div> <!-- Loading spinner -->
-        </div>
+            <div id="status-message" class="fade-in" aria-live="polite"></div>
+            <button id="dismiss-btn" class="btn dismiss-btn" style="display: none;">Dismiss</button>
+            <div id="loading-spinner" class="spinner" style="display: none;" aria-hidden="true"></div>
+        </main>
     </div>
 
-    <audio id="notification-sound" src="notification.mp3"></audio> <!-- Add a notification sound file -->
-    
+    <audio id="notification-sound" src="notification.mp3" preload="auto"></audio>
     <script src="script.js"></script>
 </body>
 </html>
