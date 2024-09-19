@@ -10,6 +10,12 @@ CORS(app)  # Enable CORS for all routes
 if not os.path.exists('uploads'):
     os.makedirs('uploads')
 
+# Basic route to handle the root URL
+@app.route('/')
+def index():
+    return jsonify({'status': 'success', 'message': 'AutoCV is running!'})
+
+# Route to handle CV sending
 @app.route('/send-cv', methods=['POST'])
 def send_cv():
     try:
@@ -25,7 +31,7 @@ def send_cv():
         # Read email configuration
         email_config = read_config()
 
-        # Send the email
+        # Send the email to each recipient
         for recipient in recipient_emails:
             send_email(subject, body, recipient, cv_path, 
                        email_config['sender_email'], 
@@ -41,5 +47,7 @@ def send_cv():
     except Exception as e:
         return jsonify({'status': 'error', 'message': str(e)})
 
+# Ensure the app runs on the correct port in production
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Use port from environment or default to 5000
+    app.run(host='0.0.0.0', port=port)
